@@ -28,6 +28,12 @@ public class AgendaTelefono {
 		return opcion;
 	}
 	
+	public static void listaContacto(String mContacto[][]) {
+		for (int i = 0; i<buscaHueco(mContacto); i++) {
+			System.out.println("Contacto " + (i+1) + ": " + mContacto[i][0] + "--->" + mContacto[i][1]);
+		}
+	}
+	
 	public static int buscaHueco(String mContacto[][]) {
 		int pos = 0;
 		for (int i = 0; i<mContacto.length; i++) {
@@ -47,6 +53,7 @@ public class AgendaTelefono {
 		System.out.println("Pon el teléfono del contacto");
 		mContacto[i][1] = leer.nextLine();
 	}
+	
 
 	public static void main(String[] args) {
 		Scanner leer = new Scanner(System.in);
@@ -57,13 +64,13 @@ public class AgendaTelefono {
 			opc = imprimeMenu();
 			switch(opc) {
 			case 1:
-				System.out.println("Viendo contacto");
+				listaContacto(mContacto);
 				break;
 			case 2:
 				guardaContacto(mContacto);
 				break;
 			case 3:
-				System.out.println("Eliminando contacto");
+				System.out.println("Borrando contacto");
 				break;
 			case 4:
 				System.out.println("Buscando contacto");
