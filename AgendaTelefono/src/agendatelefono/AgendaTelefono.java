@@ -29,17 +29,18 @@ public class AgendaTelefono {
 	}
 	
 	public static void listaContacto(String mContacto[][]) {
-		for (int i = 0; i<buscaHueco(mContacto); i++) {
-			System.out.println("Contacto " + (i+1) + ": " + mContacto[i][0] + "--->" + mContacto[i][1]);
+		for (int i = 0; i<mContacto.length; i++) {
+			if (mContacto[i][0] != null) {
+				System.out.println("Contacto " + (i+1) + ": " + mContacto[i][0] + "--->" + mContacto[i][1]);
+			}
 		}
 	}
 	
 	public static int buscaHueco(String mContacto[][]) {
-		int pos = 0;
+		int pos = -1;
 		for (int i = 0; i<mContacto.length; i++) {
 			if (mContacto[i][0] == null) {
-				pos = i;
-				i = 50;
+				return i;
 			}
 		}
 		return pos;
@@ -54,6 +55,14 @@ public class AgendaTelefono {
 		mContacto[i][1] = leer.nextLine();
 	}
 	
+	public static void borrarContacto(String mContacto[][]) {
+		int borro;
+		Scanner leer = new Scanner(System.in);
+		System.out.println("Dime que contacto quieres borrar");
+		borro = leer.nextInt();
+		mContacto[borro-1][0] = null;
+		mContacto[borro-1][1] = null;
+	}
 
 	public static void main(String[] args) {
 		Scanner leer = new Scanner(System.in);
@@ -70,7 +79,7 @@ public class AgendaTelefono {
 				guardaContacto(mContacto);
 				break;
 			case 3:
-				System.out.println("Borrando contacto");
+				borrarContacto(mContacto);
 				break;
 			case 4:
 				System.out.println("Buscando contacto");
