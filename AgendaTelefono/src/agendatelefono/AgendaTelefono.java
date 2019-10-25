@@ -56,24 +56,33 @@ public class AgendaTelefono {
 	}
 	
 	public static void borrarContacto(String mContacto[][]) {
-		int borro;
-		Scanner leer = new Scanner(System.in);
-		System.out.println("Dime qué contacto quieres borrar");
-		borro = leer.nextInt();
-		mContacto[borro-1][0] = null;
-		mContacto[borro-1][1] = null;
+		int i = buscaContacto(mContacto);
+		mContacto[i][0] = null;
+		mContacto[i][1] = null;
 	}
 	
-	public static void buscaContacto(String mContacto[][]) {
+	public static int buscaContacto(String mContacto[][]) {
 		String busqueda;
 		Scanner leer = new Scanner(System.in);
-		System.out.println("Dime un nombre o teléfono y te diré su contacto");
+		System.out.println("Dime el nombre o el teléfono.");
 		busqueda = leer.nextLine();
 		for (int i = 0; i<mContacto.length; i++) {
 			if((mContacto[i][0] != null && mContacto[i][1] != null) && (mContacto[i][0].equalsIgnoreCase(busqueda) || mContacto[i][1].equalsIgnoreCase(busqueda))) {
 				System.out.println("Contacto " + (i+1) + ": " + mContacto[i][0] + "--->" + mContacto[i][1]);
+				return i;
 			}
 		}
+		return -1;
+	}
+	
+	public static void editarContacto(String mContacto[][]) {
+		int i = buscaContacto(mContacto);
+		Scanner leer = new Scanner(System.in);
+		mContacto[i][0] = null;
+		mContacto[i][1] = null;
+		System.out.println("Pon el nuevo nombre y teléfono del contacto.");
+		mContacto[i][0] = leer.nextLine();
+		mContacto[i][1] = leer.nextLine();
 	}
 
 	public static void main(String[] args) {
@@ -97,7 +106,7 @@ public class AgendaTelefono {
 				buscaContacto(mContacto);
 				break;
 			case 5:	
-				System.out.println("Editando contacto");
+				editarContacto(mContacto);
 				break;
 			case 6:	
 				System.out.println("Saliendo");
