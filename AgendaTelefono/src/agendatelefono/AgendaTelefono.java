@@ -58,10 +58,22 @@ public class AgendaTelefono {
 	public static void borrarContacto(String mContacto[][]) {
 		int borro;
 		Scanner leer = new Scanner(System.in);
-		System.out.println("Dime que contacto quieres borrar");
+		System.out.println("Dime qué contacto quieres borrar");
 		borro = leer.nextInt();
 		mContacto[borro-1][0] = null;
 		mContacto[borro-1][1] = null;
+	}
+	
+	public static void buscaContacto(String mContacto[][]) {
+		String busqueda;
+		Scanner leer = new Scanner(System.in);
+		System.out.println("Dime un nombre o teléfono y te diré su contacto");
+		busqueda = leer.nextLine();
+		for (int i = 0; i<mContacto.length; i++) {
+			if((mContacto[i][0] != null && mContacto[i][1] != null) && (mContacto[i][0].equalsIgnoreCase(busqueda) || mContacto[i][1].equalsIgnoreCase(busqueda))) {
+				System.out.println("Contacto " + (i+1) + ": " + mContacto[i][0] + "--->" + mContacto[i][1]);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
@@ -82,7 +94,7 @@ public class AgendaTelefono {
 				borrarContacto(mContacto);
 				break;
 			case 4:
-				System.out.println("Buscando contacto");
+				buscaContacto(mContacto);
 				break;
 			case 5:	
 				System.out.println("Editando contacto");
